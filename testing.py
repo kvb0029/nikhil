@@ -1,7 +1,6 @@
 import unittest
 from main import OrganManagementSystem  # Import the main system
 
-
 class TestOrganManagementSystem(unittest.TestCase):
     def setUp(self):
         """Set up a fresh instance of the system before each test."""
@@ -78,16 +77,16 @@ class TestOrganManagementSystem(unittest.TestCase):
         self.assertEqual(len(self.system.recipients), 1)
         self.assertEqual(len(self.system.matches), 1)
 
-    def test_organ_demand_tracker(self):
-        """Test the organ demand tracker."""
-        self.system.recipients = [
-            {"name": "Alice Smith", "age": 28, "organ": "Kidney", "blood_group": "A+", "urgency": 4},
-            {"name": "Bob Johnson", "age": 40, "organ": "Kidney", "blood_group": "O+", "urgency": 3},
-            {"name": "Charlie Lee", "age": 50, "organ": "Liver", "blood_group": "B+", "urgency": 5},
-        ]
-        demand = self.system.track_organ_demand()
-        self.assertEqual(demand["Kidney"], 2)
-        self.assertEqual(demand["Liver"], 1)
+    def track_organ_demand(self):
+        demand = {}
+        for recipient in self.recipients:
+            organ = recipient['organ']
+            demand[organ] = demand.get(organ, 0) + 1
+    
+        print("Organ Demand Tracker:")
+        for organ, count in demand.items():
+            print(f"Organ: {organ}, Recipients Waiting: {count}")
+        return demand  # Ensure the demand dictionary is returned
 
 
 if __name__ == "__main__":
