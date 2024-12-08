@@ -1,5 +1,5 @@
 import unittest
-from organ_management import OrganManagementSystem  # Import the main system
+from main import OrganManagementSystem  # Import the main system
 
 
 class TestOrganManagementSystem(unittest.TestCase):
